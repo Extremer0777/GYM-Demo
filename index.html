@@ -1,0 +1,2391 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Project Collection</title>
+    <style>
+        body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #000; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+        #app { display: flex; flex-direction: column; height: 100%; }
+        header { 
+            background: #111; 
+            color: #fff; 
+            padding: 0 20px; 
+            height: 60px;
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            border-bottom: 2px solid #00c853;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            z-index: 100;
+        }
+        .logo { font-weight: bold; font-size: 1.4rem; letter-spacing: 1px; }
+        .logo span { color: #00c853; }
+        .switcher { display: flex; gap: 15px; }
+        button { 
+            background: #222; 
+            color: #ccc; 
+            border: 1px solid #444; 
+            padding: 8px 20px; 
+            border-radius: 4px; 
+            cursor: pointer; 
+            transition: all 0.3s ease; 
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+        button:hover { 
+            background: #333; 
+            color: #fff; 
+            border-color: #666;
+            transform: translateY(-1px);
+        }
+        button.active { 
+            background: #ff3d00; 
+            color: #fff; 
+            border-color: #ff3d00; 
+            box-shadow: 0 0 15px rgba(255, 61, 0, 0.4);
+        }
+        iframe { flex: 1; border: none; width: 100%; background: #fff; }
+    </style>
+</head>
+<body>
+    <div id=app>
+        <header>
+            <div class="logo">GREEN SPARROW<span>      PROJECTS</span></div>
+            <div class="switcher">
+                <button onclick="load(1)" id="b1">IronPulse</button>
+                <button onclick="load(2)" id="b2">IronForge</button>
+            </div>
+        </header>
+        <iframe id="viewer"></iframe>
+    </div>
+
+    <textarea id="p1" style="display:none"><!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IRONPULSE | Elite Fitness Center</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'oswald': ['Oswald', 'sans-serif'],
+                        'inter': ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'neon': '#ccff00',
+                        'neon-dark': '#a8d600',
+                        'dark': '#0a0a0a',
+                        'darker': '#050505',
+                        'gray-custom': '#1a1a1a',
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'slide-up': 'slideUp 0.8s ease-out forwards',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        slideUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0a0a;
+            color: white;
+            overflow-x: hidden;
+        }
+        
+        .font-oswald {
+            font-family: 'Oswald', sans-serif;
+        }
+        
+        .text-stroke {
+            -webkit-text-stroke: 2px #ccff00;
+            color: transparent;
+        }
+        
+        .clip-diagonal {
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+        }
+        
+        .clip-diagonal-reverse {
+            clip-path: polygon(0 15%, 100% 0, 100% 100%, 0 100%);
+        }
+        
+        .neon-glow {
+            box-shadow: 0 0 20px rgba(204, 255, 0, 0.3), 0 0 40px rgba(204, 255, 0, 0.1);
+        }
+        
+        .neon-text-glow {
+            text-shadow: 0 0 10px rgba(204, 255, 0, 0.5);
+        }
+        
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(204, 255, 0, 0.15);
+        }
+        
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .counter-value {
+            font-variant-numeric: tabular-nums;
+        }
+        
+        .schedule-row {
+            transition: all 0.3s ease;
+        }
+        
+        .schedule-row:hover {
+            background-color: rgba(204, 255, 0, 0.05);
+            transform: translateX(10px);
+        }
+        
+        .parallax-bg {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        
+        .gradient-mask {
+            mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ccff00;
+        }
+        
+        .hamburger-line {
+            transition: all 0.3s ease;
+        }
+        
+        .menu-open .hamburger-line:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        
+        .menu-open .hamburger-line:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .menu-open .hamburger-line:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+        
+        .video-overlay {
+            background: linear-gradient(135deg, rgba(10,10,10,0.9) 0%, rgba(10,10,10,0.4) 100%);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 bg-transparent">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer group" onclick="window.scrollTo(0,0)">
+                    <i class="fas fa-dumbbell text-neon text-3xl group-hover:rotate-12 transition-transform duration-300"></i>
+                    <span class="font-oswald text-2xl font-bold tracking-wider text-white group-hover:text-neon transition-colors">IRON<span class="text-neon">PULSE</span></span>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="text-gray-300 hover:text-neon transition-colors font-medium text-sm tracking-widest uppercase">Home</a>
+                    <a href="#about" class="text-gray-300 hover:text-neon transition-colors font-medium text-sm tracking-widest uppercase">About</a>
+                    <a href="#classes" class="text-gray-300 hover:text-neon transition-colors font-medium text-sm tracking-widest uppercase">Classes</a>
+                    <a href="#schedule" class="text-gray-300 hover:text-neon transition-colors font-medium text-sm tracking-widest uppercase">Schedule</a>
+                    <a href="#pricing" class="text-gray-300 hover:text-neon transition-colors font-medium text-sm tracking-widest uppercase">Pricing</a>
+                    <a href="#bmi" class="text-gray-300 hover:text-neon transition-colors font-medium text-sm tracking-widest uppercase">BMI</a>
+                    <button onclick="scrollToSection('contact')" class="bg-neon text-dark px-6 py-2 font-bold font-oswald uppercase tracking-wider hover:bg-white transition-all duration-300 transform hover:scale-105">
+                        Join Now
+                    </button>
+                </div>
+                
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-white focus:outline-none">
+                        <div class="w-6 flex flex-col gap-1.5">
+                            <span class="hamburger-line w-full h-0.5 bg-white block"></span>
+                            <span class="hamburger-line w-full h-0.5 bg-white block"></span>
+                            <span class="hamburger-line w-full h-0.5 bg-white block"></span>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-dark/95 backdrop-blur-lg border-t border-gray-800">
+            <div class="px-4 pt-2 pb-6 space-y-2">
+                <a href="#home" class="block px-3 py-2 text-gray-300 hover:text-neon hover:bg-gray-custom rounded-md">Home</a>
+                <a href="#about" class="block px-3 py-2 text-gray-300 hover:text-neon hover:bg-gray-custom rounded-md">About</a>
+                <a href="#classes" class="block px-3 py-2 text-gray-300 hover:text-neon hover:bg-gray-custom rounded-md">Classes</a>
+                <a href="#schedule" class="block px-3 py-2 text-gray-300 hover:text-neon hover:bg-gray-custom rounded-md">Schedule</a>
+                <a href="#pricing" class="block px-3 py-2 text-gray-300 hover:text-neon hover:bg-gray-custom rounded-md">Pricing</a>
+                <a href="#bmi" class="block px-3 py-2 text-gray-300 hover:text-neon hover:bg-gray-custom rounded-md">BMI Calculator</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative h-screen flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <div class="absolute inset-0 bg-gradient-to-b from-dark/80 via-dark/50 to-dark z-10"></div>
+            <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1920&q=80')] bg-cover bg-center parallax-bg"></div>
+        </div>
+        
+        <div class="relative z-20 text-center px-4 max-w-5xl mx-auto">
+            <p class="text-neon font-oswald text-lg md:text-xl tracking-[0.3em] uppercase mb-4 animate-slide-up" style="animation-delay: 0.2s;">Welcome to IronPulse</p>
+            <h1 class="font-oswald text-5xl md:text-7xl lg:text-9xl font-bold text-white mb-6 leading-none animate-slide-up" style="animation-delay: 0.4s;">
+                FORGE YOUR<br>
+                <span class="text-stroke">LEGACY</span>
+            </h1>
+            <p class="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto mb-10 animate-slide-up" style="animation-delay: 0.6s;">
+                Transform your body, elevate your mind. State-of-the-art equipment, world-class trainers, and an unstoppable community.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up" style="animation-delay: 0.8s;">
+                <button onclick="scrollToSection('pricing')" class="bg-neon text-dark px-8 py-4 font-oswald font-bold text-lg uppercase tracking-wider hover:bg-white transition-all duration-300 transform hover:scale-105 neon-glow">
+                    Start Training
+                </button>
+                <button onclick="scrollToSection('about')" class="border-2 border-white text-white px-8 py-4 font-oswald font-bold text-lg uppercase tracking-wider hover:bg-white hover:text-dark transition-all duration-300">
+                    Learn More
+                </button>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce z-20">
+            <i class="fas fa-chevron-down text-neon text-2xl"></i>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-20 bg-darker relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-neon to-transparent opacity-50"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div class="text-center reveal">
+                    <div class="font-oswald text-4xl md:text-6xl font-bold text-neon counter-value" data-target="2500">0</div>
+                    <div class="text-gray-400 mt-2 uppercase tracking-widest text-sm">Active Members</div>
+                </div>
+                <div class="text-center reveal">
+                    <div class="font-oswald text-4xl md:text-6xl font-bold text-neon counter-value" data-target="45">0</div>
+                    <div class="text-gray-400 mt-2 uppercase tracking-widest text-sm">Expert Trainers</div>
+                </div>
+                <div class="text-center reveal">
+                    <div class="font-oswald text-4xl md:text-6xl font-bold text-neon counter-value" data-target="80">0</div>
+                    <div class="text-gray-400 mt-2 uppercase tracking-widest text-sm">Weekly Classes</div>
+                </div>
+                <div class="text-center reveal">
+                    <div class="font-oswald text-4xl md:text-6xl font-bold text-neon counter-value" data-target="15">0</div>
+                    <div class="text-gray-400 mt-2 uppercase tracking-widest text-sm">Years Experience</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 bg-dark relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="reveal">
+                    <p class="text-neon font-oswald text-lg tracking-widest uppercase mb-4">About Us</p>
+                    <h2 class="font-oswald text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
+                        WE ARE MORE THAN<br>
+                        <span class="text-stroke">A GYM</span>
+                    </h2>
+                    <p class="text-gray-400 text-lg mb-6 leading-relaxed">
+                        Founded in 2010, IronPulse has evolved from a small warehouse gym into the city's premier fitness destination. We believe fitness is not just about physical strength—it's about mental resilience, community support, and personal growth.
+                    </p>
+                    <p class="text-gray-400 text-lg mb-8 leading-relaxed">
+                        Our 20,000 sq ft facility features cutting-edge equipment, dedicated zones for functional training, recovery, and nutrition counseling. Every detail is designed to optimize your performance.
+                    </p>
+                    
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-neon/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-heartbeat text-neon text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-oswald font-bold text-white text-lg">Cardio Zone</h4>
+                                <p class="text-gray-500 text-sm">Premium treadmills, bikes & rowers</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-neon/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-dumbbell text-neon text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-oswald font-bold text-white text-lg">Free Weights</h4>
+                                <p class="text-gray-500 text-sm">Full range up to 150lbs</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-neon/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-users text-neon text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-oswald font-bold text-white text-lg">Group Classes</h4>
+                                <p class="text-gray-500 text-sm">Yoga, HIIT, Spin & more</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-neon/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-spa text-neon text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-oswald font-bold text-white text-lg">Recovery</h4>
+                                <p class="text-gray-500 text-sm">Sauna, steam & massage</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="relative reveal">
+                    <div class="relative rounded-2xl overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=800&q=80" alt="Gym Interior" class="w-full h-[600px] object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-dark/80 to-transparent"></div>
+                        <div class="absolute bottom-8 left-8 right-8">
+                            <div class="bg-dark/80 backdrop-blur-md p-6 rounded-xl border border-gray-800">
+                                <p class="text-neon font-oswald text-2xl font-bold mb-2">"The only bad workout is the one that didn't happen."</p>
+                                <p class="text-gray-400">— IronPulse Philosophy</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="absolute -top-6 -right-6 w-32 h-32 bg-neon/20 rounded-full blur-3xl"></div>
+                    <div class="absolute -bottom-6 -left-6 w-32 h-32 bg-neon/20 rounded-full blur-3xl"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Classes Section -->
+    <section id="classes" class="py-24 bg-darker clip-diagonal-reverse">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <p class="text-neon font-oswald text-lg tracking-widest uppercase mb-4">Our Programs</p>
+                <h2 class="font-oswald text-4xl md:text-6xl font-bold text-white mb-6">
+                    CHOOSE YOUR <span class="text-stroke">BATTLE</span>
+                </h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">From high-intensity combat training to mindful yoga flows, find the perfect program to match your goals.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Class Card 1 -->
+                <div class="group relative overflow-hidden rounded-2xl bg-gray-custom card-hover reveal">
+                    <div class="h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1549576490-b0b4831ef60a?w=600&q=80" alt="HIIT Training" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-gray-custom via-transparent to-transparent"></div>
+                    </div>
+                    <div class="p-8">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="font-oswald text-2xl font-bold text-white group-hover:text-neon transition-colors">HIIT BLAST</h3>
+                            <span class="bg-neon/20 text-neon px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Advanced</span>
+                        </div>
+                        <p class="text-gray-400 mb-6">High-intensity interval training designed to torch calories and build explosive power in 45 minutes.</p>
+                        <div class="flex items-center justify-between text-sm text-gray-500">
+                            <span class="flex items-center gap-2"><i class="far fa-clock"></i> 45 min</span>
+                            <span class="flex items-center gap-2"><i class="fas fa-fire"></i> 600+ cal</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Class Card 2 -->
+                <div class="group relative overflow-hidden rounded-2xl bg-gray-custom card-hover reveal">
+                    <div class="h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?w=600&q=80" alt="Yoga" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-gray-custom via-transparent to-transparent"></div>
+                    </div>
+                    <div class="p-8">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="font-oswald text-2xl font-bold text-white group-hover:text-neon transition-colors">POWER YOGA</h3>
+                            <span class="bg-neon/20 text-neon px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">All Levels</span>
+                        </div>
+                        <p class="text-gray-400 mb-6">Dynamic vinyasa flow that builds strength, flexibility, and mental clarity through breath and movement.</p>
+                        <div class="flex items-center justify-between text-sm text-gray-500">
+                            <span class="flex items-center gap-2"><i class="far fa-clock"></i> 60 min</span>
+                            <span class="flex items-center gap-2"><i class="fas fa-fire"></i> 300 cal</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Class Card 3 -->
+                <div class="group relative overflow-hidden rounded-2xl bg-gray-custom card-hover reveal">
+                    <div class="h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1534258936925-c48947387e3b?w=600&q=80" alt="Boxing" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-gray-custom via-transparent to-transparent"></div>
+                    </div>
+                    <div class="p-8">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="font-oswald text-2xl font-bold text-white group-hover:text-neon transition-colors">COMBAT BOX</h3>
+                            <span class="bg-neon/20 text-neon px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Intermediate</span>
+                        </div>
+                        <p class="text-gray-400 mb-6">Boxing-inspired cardio workout combining punch combinations with athletic conditioning drills.</p>
+                        <div class="flex items-center justify-between text-sm text-gray-500">
+                            <span class="flex items-center gap-2"><i class="far fa-clock"></i> 50 min</span>
+                            <span class="flex items-center gap-2"><i class="fas fa-fire"></i> 700 cal</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Class Card 4 -->
+                <div class="group relative overflow-hidden rounded-2xl bg-gray-custom card-hover reveal">
+                    <div class="h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?w=600&q=80" alt="Spin" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-gray-custom via-transparent to-transparent"></div>
+                    </div>
+                    <div class="p-8">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="font-oswald text-2xl font-bold text-white group-hover:text-neon transition-colors">SPIN CYCLE</h3>
+                            <span class="bg-neon/20 text-neon px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">All Levels</span>
+                        </div>
+                        <p class="text-gray-400 mb-6">Indoor cycling experience with immersive lighting and heart-pumping music to drive your performance.</p>
+                        <div class="flex items-center justify-between text-sm text-gray-500">
+                            <span class="flex items-center gap-2"><i class="far fa-clock"></i> 45 min</span>
+                            <span class="flex items-center gap-2"><i class="fas fa-fire"></i> 500 cal</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Class Card 5 -->
+                <div class="group relative overflow-hidden rounded-2xl bg-gray-custom card-hover reveal">
+                    <div class="h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=600&q=80" alt="Strength" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-gray-custom via-transparent to-transparent"></div>
+                    </div>
+                    <div class="p-8">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="font-oswald text-2xl font-bold text-white group-hover:text-neon transition-colors">IRON LIFT</h3>
+                            <span class="bg-neon/20 text-neon px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Advanced</span>
+                        </div>
+                        <p class="text-gray-400 mb-6">Progressive strength training program focusing on compound lifts and hypertrophy techniques.</p>
+                        <div class="flex items-center justify-between text-sm text-gray-500">
+                            <span class="flex items-center gap-2"><i class="far fa-clock"></i> 60 min</span>
+                            <span class="flex items-center gap-2"><i class="fas fa-fire"></i> 400 cal</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Class Card 6 -->
+                <div class="group relative overflow-hidden rounded-2xl bg-gray-custom card-hover reveal">
+                    <div class="h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=600&q=80" alt="CrossFit" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-gray-custom via-transparent to-transparent"></div>
+                    </div>
+                    <div class="p-8">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="font-oswald text-2xl font-bold text-white group-hover:text-neon transition-colors">CROSS PULSE</h3>
+                            <span class="bg-neon/20 text-neon px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Advanced</span>
+                        </div>
+                        <p class="text-gray-400 mb-6">Constantly varied functional movements performed at high intensity. The ultimate test of fitness.</p>
+                        <div class="flex items-center justify-between text-sm text-gray-500">
+                            <span class="flex items-center gap-2"><i class="far fa-clock"></i> 60 min</span>
+                            <span class="flex items-center gap-2"><i class="fas fa-fire"></i> 800 cal</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Schedule Section -->
+    <section id="schedule" class="py-24 bg-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <p class="text-neon font-oswald text-lg tracking-widest uppercase mb-4">Timetable</p>
+                <h2 class="font-oswald text-4xl md:text-6xl font-bold text-white mb-6">
+                    WEEKLY <span class="text-stroke">SCHEDULE</span>
+                </h2>
+            </div>
+            
+            <div class="bg-gray-custom rounded-2xl overflow-hidden border border-gray-800 reveal">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left">
+                        <thead>
+                            <tr class="border-b border-gray-800">
+                                <th class="p-6 font-oswald text-neon uppercase tracking-wider">Time</th>
+                                <th class="p-6 font-oswald text-white uppercase tracking-wider">Monday</th>
+                                <th class="p-6 font-oswald text-white uppercase tracking-wider">Tuesday</th>
+                                <th class="p-6 font-oswald text-white uppercase tracking-wider">Wednesday</th>
+                                <th class="p-6 font-oswald text-white uppercase tracking-wider">Thursday</th>
+                                <th class="p-6 font-oswald text-white uppercase tracking-wider">Friday</th>
+                                <th class="p-6 font-oswald text-white uppercase tracking-wider">Saturday</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-gray-400">
+                            <tr class="schedule-row border-b border-gray-800/50">
+                                <td class="p-6 font-oswald text-white">06:00 AM</td>
+                                <td class="p-6"><span class="text-neon font-bold">HIIT Blast</span><br><span class="text-xs text-gray-500">Coach Mike</span></td>
+                                <td class="p-6"><span class="text-neon font-bold">Spin Cycle</span><br><span class="text-xs text-gray-500">Coach Sarah</span></td>
+                                <td class="p-6"><span class="text-neon font-bold">Power Yoga</span><br><span class="text-xs text-gray-500">Coach Emma</span></td>
+                                <td class="p-6"><span class="text-neon font-bold">HIIT Blast</span><br><span class="text-xs text-gray-500">Coach Mike</span></td>
+                                <td class="p-6"><span class="text-neon font-bold">Spin Cycle</span><br><span class="text-xs text-gray-500">Coach Sarah</span></td>
+                                <td class="p-6"><span class="text-neon font-bold">Cross Pulse</span><br><span class="text-xs text-gray-500">Coach Jake</span></td>
+                            </tr>
+                            <tr class="schedule-row border-b border-gray-800/50">
+                                <td class="p-6 font-oswald text-white">09:00 AM</td>
+                                <td class="p-6"><span class="text-neon font-bold">Power Yoga</span><br><span class="text-xs text-gray-500">Coach Emma</span></td>
+                                <td class="p-6"><span class="text-neon font-bold">Combat Box</span><br><span class="text-xs text-gray-500">Coach Alex</span></td>
+                                <td class="p-6"><span class="text-neon font-bold">Iron Lift</span><br><span class="text-xs text-gray-500">Coach Mike</span></td>
+                                <td class="p-6"><span class="text-neon font-bold">Power Yoga</span><br><span class="text-xs text-gray-500">Coach Emma</span></td>
+                                <td class="p-6"><span class="text-neon font-bold">Combat Box</span><br><span class="text-xs text-gray-500">Coach Alex</span></td>
+                                <td class="p-6"><span class="text-neon font-bold">HIIT Blast</span><br><span class="text-xs text-gray-500">Coach Mike</span></td>
+                            </tr>
+                            <tr class="schedule-row border-b border-gray-800/50">
+                                <td class="p-6 font-oswald text-white">12:00 PM</td>
+                                <td class="p-6"><span class="text-neon font-bold">Spin Cycle</span><br><span class="text-xs text-gray-500">Coach Sarah</span></td>
+                                <td class="p-6"><span class="text-neon font-bold">HIIT Blast</span><br><span class="text-xs text-gray-500">Coach Mike</span></td>
+                                <td class="p-6"><span class="text-neon font-bold">Spin Cycle</span><br><span class="text-xs text-gray-500">Coach Sarah</span></td>
+                                <td class="p-6"><span class="text-neon font-bold">Iron Lift</span><br><span class="text-xs text-gray-500">Coach Jake</span></td>
+                                <td class="p-6"><span class="text-neon font-bold">Power Yoga</span><br><span class="text-xs text-gray-500">Coach Emma</span></td>
+                                <td class="p-6">-</td>
+                            </tr>
+                            <tr class="schedule-row border-b border-gray-800/50">
+                                <td class="p-6 font-oswald text-white">05:30 PM</td>
+                                <td class="p-6"><span class="text-neon font-bold">Combat Box</span><br><span class="text-xs text-gray-500">Coach Alex</span></td>
+                                <td class="p-6"><span class="text-neon font-bold">Iron Lift</span><br><span class="text-xs text-gray-500">Coach Jake</span></td>
+                                <td class="p-6"><span class="text-neon font-bold">Cross Pulse</span><br><span class="text-xs text-gray-500">Coach Jake</span></td>
+                                <td class="p-6"><span class="text-neon font-bold">Combat Box</span><br><span class="text-xs text-gray-500">Coach Alex</span></td>
+                                <td class="p-6"><span class="text-neon font-bold">Cross Pulse</span><br><span class="text-xs text-gray-500">Coach Jake</span></td>
+                                <td class="p-6">-</td>
+                            </tr>
+                            <tr class="schedule-row">
+                                <td class="p-6 font-oswald text-white">07:00 PM</td>
+                                <td class="p-6"><span class="text-neon font-bold">Cross Pulse</span><br><span class="text-xs text-gray-500">Coach Jake</span></td>
+                                <td class="p-6"><span class="text-neon font-bold">Spin Cycle</span><br><span class="text-xs text-gray-500">Coach Sarah</span></td>
+                                <td class="p-6"><span class="text-neon font-bold">Combat Box</span><br><span class="text-xs text-gray-500">Coach Alex</span></td>
+                                <td class="p-6"><span class="text-neon font-bold">HIIT Blast</span><br><span class="text-xs text-gray-500">Coach Mike</span></td>
+                                <td class="p-6"><span class="text-neon font-bold">Iron Lift</span><br><span class="text-xs text-gray-500">Coach Jake</span></td>
+                                <td class="p-6">-</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-24 bg-darker relative">
+        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1920&q=80')] bg-cover bg-center opacity-5"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16 reveal">
+                <p class="text-neon font-oswald text-lg tracking-widest uppercase mb-4">Membership</p>
+                <h2 class="font-oswald text-4xl md:text-6xl font-bold text-white mb-6">
+                    INVEST IN <span class="text-stroke">YOURSELF</span>
+                </h2>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <!-- Basic Plan -->
+                <div class="bg-gray-custom rounded-2xl p-8 border border-gray-800 card-hover reveal relative">
+                    <div class="mb-8">
+                        <h3 class="font-oswald text-2xl font-bold text-white mb-2">BASIC</h3>
+                        <p class="text-gray-500 text-sm">Perfect for beginners</p>
+                    </div>
+                    <div class="mb-8">
+                        <span class="font-oswald text-5xl font-bold text-white">$29</span>
+                        <span class="text-gray-500">/month</span>
+                    </div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center gap-3 text-gray-400">
+                            <i class="fas fa-check text-neon"></i>
+                            <span>Access to gym floor</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-400">
+                            <i class="fas fa-check text-neon"></i>
+                            <span>Locker room access</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-400">
+                            <i class="fas fa-check text-neon"></i>
+                            <span>Basic equipment</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-500">
+                            <i class="fas fa-times text-gray-600"></i>
+                            <span>Group classes</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-500">
+                            <i class="fas fa-times text-gray-600"></i>
+                            <span>Personal training</span>
+                        </li>
+                    </ul>
+                    <button class="w-full py-4 border-2 border-gray-700 text-white font-oswald font-bold uppercase tracking-wider hover:border-neon hover:text-neon transition-all duration-300 rounded-lg">
+                        Select Plan
+                    </button>
+                </div>
+
+                <!-- Pro Plan -->
+                <div class="bg-gray-custom rounded-2xl p-8 border-2 border-neon card-hover reveal relative transform md:-translate-y-4 neon-glow">
+                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-neon text-dark px-4 py-1 rounded-full font-oswald font-bold text-sm uppercase tracking-wider">
+                        Most Popular
+                    </div>
+                    <div class="mb-8">
+                        <h3 class="font-oswald text-2xl font-bold text-white mb-2">PRO</h3>
+                        <p class="text-gray-500 text-sm">For serious athletes</p>
+                    </div>
+                    <div class="mb-8">
+                        <span class="font-oswald text-5xl font-bold text-neon">$59</span>
+                        <span class="text-gray-500">/month</span>
+                    </div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center gap-3 text-gray-400">
+                            <i class="fas fa-check text-neon"></i>
+                            <span>24/7 gym access</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-400">
+                            <i class="fas fa-check text-neon"></i>
+                            <span>Unlimited group classes</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-400">
+                            <i class="fas fa-check text-neon"></i>
+                            <span>Sauna & steam room</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-400">
+                            <i class="fas fa-check text-neon"></i>
+                            <span>2 PT sessions/month</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-500">
+                            <i class="fas fa-times text-gray-600"></i>
+                            <span>Nutrition planning</span>
+                        </li>
+                    </ul>
+                    <button class="w-full py-4 bg-neon text-dark font-oswald font-bold uppercase tracking-wider hover:bg-white transition-all duration-300 rounded-lg">
+                        Select Plan
+                    </button>
+                </div>
+
+                <!-- Elite Plan -->
+                <div class="bg-gray-custom rounded-2xl p-8 border border-gray-800 card-hover reveal relative">
+                    <div class="mb-8">
+                        <h3 class="font-oswald text-2xl font-bold text-white mb-2">ELITE</h3>
+                        <p class="text-gray-500 text-sm">The complete package</p>
+                    </div>
+                    <div class="mb-8">
+                        <span class="font-oswald text-5xl font-bold text-white">$99</span>
+                        <span class="text-gray-500">/month</span>
+                    </div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center gap-3 text-gray-400">
+                            <i class="fas fa-check text-neon"></i>
+                            <span>Everything in Pro</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-400">
+                            <i class="fas fa-check text-neon"></i>
+                            <span>Unlimited PT sessions</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-400">
+                            <i class="fas fa-check text-neon"></i>
+                            <span>Custom nutrition plan</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-400">
+                            <i class="fas fa-check text-neon"></i>
+                            <span>Recovery treatments</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-400">
+                            <i class="fas fa-check text-neon"></i>
+                            <span>Guest passes (4/mo)</span>
+                        </li>
+                    </ul>
+                    <button class="w-full py-4 border-2 border-gray-700 text-white font-oswald font-bold uppercase tracking-wider hover:border-neon hover:text-neon transition-all duration-300 rounded-lg">
+                        Select Plan
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BMI Calculator Section -->
+    <section id="bmi" class="py-24 bg-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="reveal">
+                    <p class="text-neon font-oswald text-lg tracking-widest uppercase mb-4">Health Tools</p>
+                    <h2 class="font-oswald text-4xl md:text-6xl font-bold text-white mb-6">
+                        BMI <span class="text-stroke">CALCULATOR</span>
+                    </h2>
+                    <p class="text-gray-400 text-lg mb-8">
+                        Calculate your Body Mass Index to understand your current health status and set realistic fitness goals. Our trainers use this data to create personalized workout plans.
+                    </p>
+                    
+                    <div class="space-y-6">
+                        <div class="bg-gray-custom p-6 rounded-xl border border-gray-800">
+                            <div class="flex items-center gap-4 mb-2">
+                                <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                                <span class="text-white font-oswald font-bold">Underweight</span>
+                                <span class="text-gray-500 ml-auto">&lt; 18.5</span>
+                            </div>
+                        </div>
+                        <div class="bg-gray-custom p-6 rounded-xl border border-gray-800">
+                            <div class="flex items-center gap-4 mb-2">
+                                <div class="w-3 h-3 rounded-full bg-neon"></div>
+                                <span class="text-white font-oswald font-bold">Normal</span>
+                                <span class="text-gray-500 ml-auto">18.5 - 24.9</span>
+                            </div>
+                        </div>
+                        <div class="bg-gray-custom p-6 rounded-xl border border-gray-800">
+                            <div class="flex items-center gap-4 mb-2">
+                                <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                                <span class="text-white font-oswald font-bold">Overweight</span>
+                                <span class="text-gray-500 ml-auto">25 - 29.9</span>
+                            </div>
+                        </div>
+                        <div class="bg-gray-custom p-6 rounded-xl border border-gray-800">
+                            <div class="flex items-center gap-4 mb-2">
+                                <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                                <span class="text-white font-oswald font-bold">Obese</span>
+                                <span class="text-gray-500 ml-auto">&ge; 30</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-custom p-8 md:p-12 rounded-2xl border border-gray-800 reveal">
+                    <h3 class="font-oswald text-2xl font-bold text-white mb-8 text-center">Calculate Your BMI</h3>
+                    
+                    <div class="space-y-6">
+                        <div class="grid grid-cols-2 gap-4">
+                            <button id="unit-metric" class="py-3 bg-neon text-dark font-oswald font-bold uppercase tracking-wider rounded-lg transition-all" onclick="setUnit('metric')">Metric</button>
+                            <button id="unit-imperial" class="py-3 bg-gray-800 text-gray-400 font-oswald font-bold uppercase tracking-wider rounded-lg transition-all" onclick="setUnit('imperial')">Imperial</button>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-gray-400 mb-2 text-sm uppercase tracking-wider">Height</label>
+                            <div class="flex gap-4">
+                                <input type="number" id="height-cm" placeholder="cm" class="w-full bg-dark border border-gray-700 rounded-lg px-4 py-3 text-white focus:border-neon focus:outline-none transition-colors">
+                                <input type="number" id="height-ft" placeholder="ft" class="w-1/2 bg-dark border border-gray-700 rounded-lg px-4 py-3 text-white focus:border-neon focus:outline-none transition-colors hidden">
+                                <input type="number" id="height-in" placeholder="in" class="w-1/2 bg-dark border border-gray-700 rounded-lg px-4 py-3 text-white focus:border-neon focus:outline-none transition-colors hidden">
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-gray-400 mb-2 text-sm uppercase tracking-wider">Weight</label>
+                            <input type="number" id="weight" placeholder="kg" class="w-full bg-dark border border-gray-700 rounded-lg px-4 py-3 text-white focus:border-neon focus:outline-none transition-colors">
+                        </div>
+                        
+                        <button onclick="calculateBMI()" class="w-full py-4 bg-neon text-dark font-oswald font-bold text-lg uppercase tracking-wider hover:bg-white transition-all duration-300 rounded-lg">
+                            Calculate
+                        </button>
+                        
+                        <div id="bmi-result" class="hidden mt-6 p-6 bg-dark rounded-xl border border-gray-800 text-center">
+                            <p class="text-gray-400 mb-2">Your BMI</p>
+                            <div id="bmi-value" class="font-oswald text-5xl font-bold text-white mb-2">0</div>
+                            <div id="bmi-category" class="text-neon font-oswald text-xl uppercase tracking-wider">Normal</div>
+                            <div class="mt-4 h-2 bg-gray-800 rounded-full overflow-hidden">
+                                <div id="bmi-bar" class="h-full bg-neon transition-all duration-1000" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-24 relative overflow-hidden">
+        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=1920&q=80')] bg-cover bg-center parallax-bg"></div>
+        <div class="absolute inset-0 bg-dark/80"></div>
+        <div class="max-w-4xl mx-auto px-4 relative z-10 text-center reveal">
+            <h2 class="font-oswald text-4xl md:text-6xl font-bold text-white mb-6">
+                READY TO <span class="text-neon">TRANSFORM?</span>
+            </h2>
+            <p class="text-gray-400 text-xl mb-10">Join 2,500+ members who have already started their journey. Your first week is free.</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button onclick="scrollToSection('contact')" class="bg-neon text-dark px-10 py-4 font-oswald font-bold text-lg uppercase tracking-wider hover:bg-white transition-all duration-300 transform hover:scale-105 neon-glow">
+                    Claim Free Trial
+                </button>
+                <button onclick="scrollToSection('pricing')" class="border-2 border-white text-white px-10 py-4 font-oswald font-bold text-lg uppercase tracking-wider hover:bg-white hover:text-dark transition-all duration-300">
+                    View Plans
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 bg-darker">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-16">
+                <div class="reveal">
+                    <p class="text-neon font-oswald text-lg tracking-widest uppercase mb-4">Contact</p>
+                    <h2 class="font-oswald text-4xl md:text-6xl font-bold text-white mb-6">
+                        GET IN <span class="text-stroke">TOUCH</span>
+                    </h2>
+                    <p class="text-gray-400 text-lg mb-12">Have questions? Want to book a tour? Our team is ready to help you start your fitness journey.</p>
+                    
+                    <div class="space-y-8">
+                        <div class="flex items-start gap-6">
+                            <div class="w-14 h-14 bg-neon/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-map-marker-alt text-neon text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-oswald font-bold text-white text-xl mb-1">Location</h4>
+                                <p class="text-gray-400">123 Fitness Avenue, Downtown<br>New York, NY 10001</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start gap-6">
+                            <div class="w-14 h-14 bg-neon/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-phone text-neon text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-oswald font-bold text-white text-xl mb-1">Phone</h4>
+                                <p class="text-gray-400">+1 (555) 123-4567</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start gap-6">
+                            <div class="w-14 h-14 bg-neon/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-envelope text-neon text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-oswald font-bold text-white text-xl mb-1">Email</h4>
+                                <p class="text-gray-400">info@ironpulse.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start gap-6">
+                            <div class="w-14 h-14 bg-neon/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i class="far fa-clock text-neon text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-oswald font-bold text-white text-xl mb-1">Hours</h4>
+                                <p class="text-gray-400">Mon-Fri: 5AM - 11PM<br>Sat-Sun: 7AM - 9PM</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-custom p-8 md:p-12 rounded-2xl border border-gray-800 reveal">
+                    <form onsubmit="handleSubmit(event)" class="space-y-6">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-gray-400 mb-2 text-sm uppercase tracking-wider">First Name</label>
+                                <input type="text" required class="w-full bg-dark border border-gray-700 rounded-lg px-4 py-3 text-white focus:border-neon focus:outline-none transition-colors">
+                            </div>
+                            <div>
+                                <label class="block text-gray-400 mb-2 text-sm uppercase tracking-wider">Last Name</label>
+                                <input type="text" required class="w-full bg-dark border border-gray-700 rounded-lg px-4 py-3 text-white focus:border-neon focus:outline-none transition-colors">
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-gray-400 mb-2 text-sm uppercase tracking-wider">Email</label>
+                            <input type="email" required class="w-full bg-dark border border-gray-700 rounded-lg px-4 py-3 text-white focus:border-neon focus:outline-none transition-colors">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-gray-400 mb-2 text-sm uppercase tracking-wider">Phone</label>
+                            <input type="tel" class="w-full bg-dark border border-gray-700 rounded-lg px-4 py-3 text-white focus:border-neon focus:outline-none transition-colors">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-gray-400 mb-2 text-sm uppercase tracking-wider">Interest</label>
+                            <select class="w-full bg-dark border border-gray-700 rounded-lg px-4 py-3 text-white focus:border-neon focus:outline-none transition-colors">
+                                <option>General Membership</option>
+                                <option>Personal Training</option>
+                                <option>Group Classes</option>
+                                <option>Nutrition Coaching</option>
+                                <option>Corporate Wellness</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-gray-400 mb-2 text-sm uppercase tracking-wider">Message</label>
+                            <textarea rows="4" class="w-full bg-dark border border-gray-700 rounded-lg px-4 py-3 text-white focus:border-neon focus:outline-none transition-colors resize-none">&lt;/textarea&gt;
+                        </div>
+                        
+                        <button type="submit" class="w-full py-4 bg-neon text-dark font-oswald font-bold text-lg uppercase tracking-wider hover:bg-white transition-all duration-300 rounded-lg">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark border-t border-gray-800 pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-12 mb-12">
+                <div class="col-span-2">
+                    <div class="flex items-center gap-2 mb-6">
+                        <i class="fas fa-dumbbell text-neon text-3xl"></i>
+                        <span class="font-oswald text-2xl font-bold tracking-wider text-white">IRON<span class="text-neon">PULSE</span></span>
+                    </div>
+                    <p class="text-gray-500 mb-6 max-w-md">Elevating fitness through innovation, community, and relentless dedication. Join the movement and forge your legacy today.</p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 bg-gray-custom rounded-full flex items-center justify-center text-gray-400 hover:bg-neon hover:text-dark transition-all duration-300">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-custom rounded-full flex items-center justify-center text-gray-400 hover:bg-neon hover:text-dark transition-all duration-300">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-custom rounded-full flex items-center justify-center text-gray-400 hover:bg-neon hover:text-dark transition-all duration-300">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-custom rounded-full flex items-center justify-center text-gray-400 hover:bg-neon hover:text-dark transition-all duration-300">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="font-oswald font-bold text-white text-lg mb-6 uppercase tracking-wider">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#about" class="text-gray-500 hover:text-neon transition-colors">About Us</a></li>
+                        <li><a href="#classes" class="text-gray-500 hover:text-neon transition-colors">Classes</a></li>
+                        <li><a href="#schedule" class="text-gray-500 hover:text-neon transition-colors">Schedule</a></li>
+                        <li><a href="#pricing" class="text-gray-500 hover:text-neon transition-colors">Pricing</a></li>
+                        <li><a href="#bmi" class="text-gray-500 hover:text-neon transition-colors">BMI Calculator</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-oswald font-bold text-white text-lg mb-6 uppercase tracking-wider">Services</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-500 hover:text-neon transition-colors">Personal Training</a></li>
+                        <li><a href="#" class="text-gray-500 hover:text-neon transition-colors">Nutrition Plans</a></li>
+                        <li><a href="#" class="text-gray-500 hover:text-neon transition-colors">Group Classes</a></li>
+                        <li><a href="#" class="text-gray-500 hover:text-neon transition-colors">Recovery Center</a></li>
+                        <li><a href="#" class="text-gray-500 hover:text-neon transition-colors">Corporate Wellness</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-gray-600 text-sm"> 2026 IronPulse Fitness. All rights reserved.</p>
+                <div class="flex gap-6 text-sm text-gray-600">
+                    <a href="#" class="hover:text-neon transition-colors">Privacy Policy</a>
+                    <a href="#" class="hover:text-neon transition-colors">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            mobileMenuBtn.classList.toggle('menu-open');
+        });
+        
+        // Close mobile menu when clicking a link
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                mobileMenuBtn.classList.remove('menu-open');
+            });
+        });
+        
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-dark/95', 'backdrop-blur-lg', 'shadow-lg');
+                navbar.classList.remove('bg-transparent');
+            } else {
+                navbar.classList.remove('bg-dark/95', 'backdrop-blur-lg', 'shadow-lg');
+                navbar.classList.add('bg-transparent');
+            }
+        });
+        
+        // Smooth scroll function
+        function scrollToSection(id) {
+            const element = document.getElementById(id);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+        
+        // Intersection Observer for reveal animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    
+                    // Trigger counter animation if it's a counter
+                    if (entry.target.querySelector('.counter-value')) {
+                        animateCounters();
+                    }
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        
+        // Counter Animation
+        let countersAnimated = false;
+        function animateCounters() {
+            if (countersAnimated) return;
+            countersAnimated = true;
+            
+            const counters = document.querySelectorAll('.counter-value');
+            counters.forEach(counter => {
+                const target = parseInt(counter.getAttribute('data-target'));
+                const duration = 2000;
+                const increment = target / (duration / 16);
+                let current = 0;
+                
+                const updateCounter = () => {
+                    current += increment;
+                    if (current < target) {
+                        counter.textContent = Math.floor(current).toLocaleString();
+                        requestAnimationFrame(updateCounter);
+                    } else {
+                        counter.textContent = target.toLocaleString();
+                    }
+                };
+                
+                updateCounter();
+            });
+        }
+        
+        // BMI Calculator
+        let currentUnit = 'metric';
+        
+        function setUnit(unit) {
+            currentUnit = unit;
+            const metricBtn = document.getElementById('unit-metric');
+            const imperialBtn = document.getElementById('unit-imperial');
+            const heightCm = document.getElementById('height-cm');
+            const heightFt = document.getElementById('height-ft');
+            const heightIn = document.getElementById('height-in');
+            const weightInput = document.getElementById('weight');
+            
+            if (unit === 'metric') {
+                metricBtn.classList.add('bg-neon', 'text-dark');
+                metricBtn.classList.remove('bg-gray-800', 'text-gray-400');
+                imperialBtn.classList.remove('bg-neon', 'text-dark');
+                imperialBtn.classList.add('bg-gray-800', 'text-gray-400');
+                
+                heightCm.classList.remove('hidden');
+                heightFt.classList.add('hidden');
+                heightIn.classList.add('hidden');
+                weightInput.placeholder = 'kg';
+            } else {
+                imperialBtn.classList.add('bg-neon', 'text-dark');
+                imperialBtn.classList.remove('bg-gray-800', 'text-gray-400');
+                metricBtn.classList.remove('bg-neon', 'text-dark');
+                metricBtn.classList.add('bg-gray-800', 'text-gray-400');
+                
+                heightCm.classList.add('hidden');
+                heightFt.classList.remove('hidden');
+                heightIn.classList.remove('hidden');
+                weightInput.placeholder = 'lbs';
+            }
+        }
+        
+        function calculateBMI() {
+            let height, weight, bmi;
+            
+            if (currentUnit === 'metric') {
+                height = parseFloat(document.getElementById('height-cm').value) / 100;
+                weight = parseFloat(document.getElementById('weight').value);
+                bmi = weight / (height * height);
+            } else {
+                const ft = parseFloat(document.getElementById('height-ft').value) || 0;
+                const inches = parseFloat(document.getElementById('height-in').value) || 0;
+                height = (ft * 12 + inches) * 0.0254;
+                weight = parseFloat(document.getElementById('weight').value) * 0.453592;
+                bmi = weight / (height * height);
+            }
+            
+            if (!height || !weight || height <= 0 || weight <= 0) {
+                alert('Please enter valid height and weight values');
+                return;
+            }
+            
+            bmi = Math.round(bmi * 10) / 10;
+            
+            const resultDiv = document.getElementById('bmi-result');
+            const bmiValue = document.getElementById('bmi-value');
+            const bmiCategory = document.getElementById('bmi-category');
+            const bmiBar = document.getElementById('bmi-bar');
+            
+            resultDiv.classList.remove('hidden');
+            bmiValue.textContent = bmi;
+            
+            let category, color, width;
+            if (bmi < 18.5) {
+                category = 'Underweight';
+                color = 'bg-green-500';
+                width = '15%';
+            } else if (bmi < 25) {
+                category = 'Normal';
+                color = 'bg-neon';
+                width = '40%';
+            } else if (bmi < 30) {
+                category = 'Overweight';
+                color = 'bg-yellow-500';
+                width = '65%';
+            } else {
+                category = 'Obese';
+                color = 'bg-red-500';
+                width = '90%';
+            }
+            
+            bmiCategory.textContent = category;
+            bmiCategory.className = `font-oswald text-xl uppercase tracking-wider ${color.replace('bg-', 'text-')}`;
+            bmiBar.className = `h-full transition-all duration-1000 ${color}`;
+            
+            setTimeout(() => {
+                bmiBar.style.width = width;
+            }, 100);
+        }
+        
+        // Form submission
+        function handleSubmit(e) {
+            e.preventDefault();
+            alert('Thank you for your message! We will contact you shortly.');
+            e.target.reset();
+        }
+        
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+</textarea>
+    <textarea id="p2" style="display:none"><!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IRONFORGE | Elite Fitness</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'display': ['Bebas Neue', 'sans-serif'],
+                        'body': ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'forge': {
+                            900: '#0a0a0a',
+                            800: '#141414',
+                            700: '#1a1a1a',
+                            600: '#262626',
+                            500: '#404040',
+                            400: '#737373',
+                            300: '#a3a3a3',
+                            200: '#d4d4d4',
+                            100: '#f5f5f5',
+                        },
+                        'accent': {
+                            DEFAULT: '#ff3d00',
+                            light: '#ff6b3d',
+                            dark: '#cc3100',
+                            glow: 'rgba(255, 61, 0, 0.3)',
+                        }
+                    },
+                    animation: {
+                        'pulse-glow': 'pulseGlow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'slide-up': 'slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                        'fade-in': 'fadeIn 0.6s ease-out forwards',
+                        'scale-in': 'scaleIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                        'float': 'float 6s ease-in-out infinite',
+                        'shimmer': 'shimmer 2s linear infinite',
+                    },
+                    keyframes: {
+                        pulseGlow: {
+                            '0%, 100%': { boxShadow: '0 0 20px rgba(255, 61, 0, 0.2)' },
+                            '50%': { boxShadow: '0 0 40px rgba(255, 61, 0, 0.5)' },
+                        },
+                        slideUp: {
+                            '0%': { opacity: '0', transform: 'translateY(40px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        scaleIn: {
+                            '0%': { opacity: '0', transform: 'scale(0.95)' },
+                            '100%': { opacity: '1', transform: 'scale(1)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        shimmer: {
+                            '0%': { backgroundPosition: '-200% 0' },
+                            '100%': { backgroundPosition: '200% 0' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0a0a;
+            color: #f5f5f5;
+            overflow-x: hidden;
+        }
+        
+        .font-display {
+            font-family: 'Bebas Neue', sans-serif;
+            letter-spacing: 0.02em;
+        }
+        
+        /* Frosted Glass */
+        .glass {
+            background: rgba(20, 20, 20, 0.6);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        
+        .glass-card {
+            background: rgba(26, 26, 26, 0.7);
+            backdrop-filter: blur(16px) saturate(150%);
+            -webkit-backdrop-filter: blur(16px) saturate(150%);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .glass-card:hover {
+            background: rgba(38, 38, 38, 0.8);
+            border-color: rgba(255, 61, 0, 0.3);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(255, 61, 0, 0.15), 0 0 0 1px rgba(255, 61, 0, 0.1);
+        }
+        
+        .glass-strong {
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(30px) saturate(200%);
+            -webkit-backdrop-filter: blur(30px) saturate(200%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Progress Slider */
+        .progress-slider {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            outline: none;
+        }
+        
+        .progress-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            background: #ff3d00;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(255, 61, 0, 0.5);
+            border: 3px solid #0a0a0a;
+            transition: transform 0.2s;
+        }
+        
+        .progress-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+        }
+        
+        .progress-slider::-moz-range-thumb {
+            width: 24px;
+            height: 24px;
+            background: #ff3d00;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 3px solid #0a0a0a;
+            box-shadow: 0 0 20px rgba(255, 61, 0, 0.5);
+        }
+        
+        /* Video Background */
+        .video-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+        }
+        
+        .video-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(10,10,10,0.3) 0%, rgba(10,10,10,0.7) 50%, rgba(10,10,10,0.95) 100%);
+            z-index: 1;
+        }
+        
+        /* High Contrast Elements */
+        .contrast-text {
+            text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+        }
+        
+        .accent-glow {
+            box-shadow: 0 0 30px rgba(255, 61, 0, 0.4), 0 0 60px rgba(255, 61, 0, 0.2);
+        }
+        
+        /* Progress Checklist */
+        .check-item {
+            transition: all 0.3s ease;
+        }
+        
+        .check-item.completed {
+            opacity: 1;
+        }
+        
+        .check-item.completed .check-circle {
+            background: #ff3d00;
+            border-color: #ff3d00;
+        }
+        
+        .check-item.completed .check-icon {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        .check-item:not(.completed) {
+            opacity: 0.4;
+        }
+        
+        .check-circle {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            border: 2px solid rgba(255,255,255,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+        
+        .check-icon {
+            opacity: 0;
+            transform: scale(0);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            color: white;
+            font-size: 12px;
+        }
+        
+        /* Range Slider Custom */
+        input[type=range] {
+            -webkit-appearance: none;
+            width: 100%;
+            background: transparent;
+        }
+        
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background: #ff3d00;
+            cursor: pointer;
+            margin-top: -8px;
+            box-shadow: 0 0 10px rgba(255,61,0,0.5);
+        }
+        
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 4px;
+            cursor: pointer;
+            background: rgba(255,255,255,0.2);
+            border-radius: 2px;
+        }
+        
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #404040;
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ff3d00;
+        }
+        
+        /* Section reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Stagger children */
+        .stagger > * {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .stagger.visible > *:nth-child(1) { animation: slideUp 0.6s 0.1s forwards; }
+        .stagger.visible > *:nth-child(2) { animation: slideUp 0.6s 0.2s forwards; }
+        .stagger.visible > *:nth-child(3) { animation: slideUp 0.6s 0.3s forwards; }
+        .stagger.visible > *:nth-child(4) { animation: slideUp 0.6s 0.4s forwards; }
+        .stagger.visible > *:nth-child(5) { animation: slideUp 0.6s 0.5s forwards; }
+        .stagger.visible > *:nth-child(6) { animation: slideUp 0.6s 0.6s forwards; }
+        .stagger.visible > *:nth-child(7) { animation: slideUp 0.6s 0.7s forwards; }
+        
+        @keyframes slideUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Plan highlight */
+        .plan-featured {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .plan-featured::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #ff3d00, transparent);
+        }
+        
+        /* Contact form */
+        .form-input {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .form-input:focus {
+            background: rgba(255,255,255,0.08);
+            border-color: #ff3d00;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(255,61,0,0.1);
+        }
+        
+        /* Video container */
+        .video-container {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .video-container::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(45deg, rgba(255,61,0,0.1) 0%, transparent 50%, rgba(255,61,0,0.05) 100%);
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-accent selection:text-white">
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <a href="#" class="flex items-center gap-3 group">
+                    <div class="w-10 h-10 bg-accent rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <i class="fas fa-dumbbell text-white text-lg"></i>
+                    </div>
+                    <span class="font-display text-3xl text-white tracking-wide">IRON<span class="text-accent">FORGE</span></span>
+                </a>
+                
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="#programs" class="text-sm font-medium text-forge-300 hover:text-white transition-colors">Programs</a>
+                    <a href="#pricing" class="text-sm font-medium text-forge-300 hover:text-white transition-colors">Pricing</a>
+                    <a href="#progress" class="text-sm font-medium text-forge-300 hover:text-white transition-colors">Progress</a>
+                    <a href="#contact" class="text-sm font-medium text-forge-300 hover:text-white transition-colors">Contact</a>
+                </div>
+                
+                <div class="flex items-center gap-4">
+                    <a href="#trial" class="hidden md:inline-flex items-center gap-2 px-6 py-2.5 bg-accent text-white rounded-full text-sm font-semibold hover:bg-accent-light transition-all animate-pulse-glow">
+                        <i class="fas fa-fire text-xs"></i>
+                        7 Days Free
+                    </a>
+                    <button id="mobile-btn" class="md:hidden w-10 h-10 flex flex-col items-center justify-center gap-1.5">
+                        <span class="w-5 h-0.5 bg-white transition-all duration-300" id="m-line-1"></span>
+                        <span class="w-5 h-0.5 bg-white transition-all duration-300" id="m-line-2"></span>
+                        <span class="w-3 h-0.5 bg-white transition-all duration-300 self-end" id="m-line-3"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden fixed inset-0 top-20 bg-forge-900/98 backdrop-blur-xl z-40 translate-x-full transition-transform duration-500">
+            <div class="flex flex-col p-8 gap-6">
+                <a href="#programs" class="text-2xl font-display text-white" onclick="closeMobile()">Programs</a>
+                <a href="#pricing" class="text-2xl font-display text-white" onclick="closeMobile()">Pricing</a>
+                <a href="#progress" class="text-2xl font-display text-white" onclick="closeMobile()">Progress</a>
+                <a href="#contact" class="text-2xl font-display text-white" onclick="closeMobile()">Contact</a>
+                <div class="pt-6 border-t border-white/10">
+                    <a href="#trial" class="inline-flex items-center gap-2 px-6 py-3 bg-accent text-white rounded-full font-display text-xl" onclick="closeMobile()">
+                        <i class="fas fa-fire"></i>
+                        START 7-DAY FREE TRIAL
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section with Video -->
+    <section class="relative h-screen min-h-[700px] flex items-center justify-center overflow-hidden">
+        <!-- Video Background -->
+        <div class="absolute inset-0 video-container">
+            <video class="video-bg" autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1920&q=80">
+                <source src="athlete_loop_4k.mp4" type="video/mp4">
+                <source src="https://assets.mixkit.co/videos/preview/mixkit-athlete-training-with-a-jump-rope-2231-large.mp4" type="video/mp4">
+                <!-- Fallback to high contrast image if video fails -->
+            </video>
+            <div class="video-overlay"></div>
+        </div>
+        
+        <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-8 reveal">
+                <span class="w-2 h-2 rounded-full bg-accent animate-pulse"></span>
+                <span class="text-xs font-semibold tracking-widest uppercase text-forge-300">Elite Training Facility</span>
+            </div>
+            
+            <h1 class="font-display text-6xl md:text-8xl lg:text-9xl text-white mb-6 leading-none contrast-text reveal" style="transition-delay: 0.1s;">
+                CHALLENGE<br>
+                <span class="text-accent">YOUR LIMITS</span>
+            </h1>
+            
+            <p class="text-lg md:text-xl text-forge-300 max-w-2xl mx-auto mb-10 leading-relaxed reveal" style="transition-delay: 0.2s;">
+                State-of-the-art equipment. World-class trainers. Uncompromising results. 
+                Forge the body you deserve.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center reveal" style="transition-delay: 0.3s;">
+                <a href="#trial" class="group inline-flex items-center gap-3 px-8 py-4 bg-accent text-white rounded-full font-semibold hover:bg-accent-light transition-all accent-glow">
+                    Claim 7-Day Free Trial
+                    <i class="fas fa-arrow-right transition-transform group-hover:translate-x-1"></i>
+                </a>
+                <a href="#programs" class="inline-flex items-center gap-3 px-8 py-4 glass text-white rounded-full font-semibold hover:bg-white/10 transition-all">
+                    <i class="fas fa-play text-xs"></i>
+                    Explore Programs
+                </a>
+            </div>
+            
+            <div class="mt-16 grid grid-cols-3 gap-8 max-w-lg mx-auto reveal" style="transition-delay: 0.4s;">
+                <div class="text-center">
+                    <div class="font-display text-3xl md:text-4xl text-white mb-1">24/7</div>
+                    <div class="text-xs text-forge-400 uppercase tracking-wider">Access</div>
+                </div>
+                <div class="text-center border-x border-white/10">
+                    <div class="font-display text-3xl md:text-4xl text-white mb-1">50+</div>
+                    <div class="text-xs text-forge-400 uppercase tracking-wider">Classes/Week</div>
+                </div>
+                <div class="text-center">
+                    <div class="font-display text-3xl md:text-4xl text-white mb-1">4K</div>
+                    <div class="text-xs text-forge-400 uppercase tracking-wider">Equipment</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 opacity-50">
+            <span class="text-[10px] font-semibold tracking-[0.3em] uppercase text-forge-400">Scroll</span>
+            <div class="w-px h-8 bg-gradient-to-b from-white to-transparent"></div>
+        </div>
+    </section>
+
+    <!-- Programs Section -->
+    <section id="programs" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <p class="text-accent font-semibold text-sm tracking-widest uppercase mb-4">Training Programs</p>
+                <h2 class="font-display text-5xl md:text-7xl text-white mb-6">FORGE YOUR <span class="text-accent">PATH</span></h2>
+                <p class="text-forge-400 max-w-2xl mx-auto">Specialized programs designed by elite athletes and sports scientists for maximum results.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 stagger" id="programs-grid">
+                <div class="glass-card rounded-2xl p-6 group cursor-pointer">
+                    <div class="w-14 h-14 rounded-xl bg-accent/10 flex items-center justify-center mb-4 group-hover:bg-accent transition-colors">
+                        <i class="fas fa-fire text-accent text-xl group-hover:text-white transition-colors"></i>
+                    </div>
+                    <h3 class="font-display text-2xl text-white mb-2">HIIT IGNITE</h3>
+                    <p class="text-forge-400 text-sm mb-4">High-intensity intervals to maximize calorie burn and metabolic rate.</p>
+                    <div class="flex items-center gap-2 text-xs text-forge-500">
+                        <i class="far fa-clock"></i>
+                        <span>45 MIN</span>
+                        <span class="mx-2">•</span>
+                        <i class="fas fa-fire"></i>
+                        <span>800 CAL</span>
+                    </div>
+                </div>
+                
+                <div class="glass-card rounded-2xl p-6 group cursor-pointer">
+                    <div class="w-14 h-14 rounded-xl bg-accent/10 flex items-center justify-center mb-4 group-hover:bg-accent transition-colors">
+                        <i class="fas fa-dumbbell text-accent text-xl group-hover:text-white transition-colors"></i>
+                    </div>
+                    <h3 class="font-display text-2xl text-white mb-2">IRON LIFT</h3>
+                    <p class="text-forge-400 text-sm mb-4">Progressive overload strength training for muscle hypertrophy.</p>
+                    <div class="flex items-center gap-2 text-xs text-forge-500">
+                        <i class="far fa-clock"></i>
+                        <span>60 MIN</span>
+                        <span class="mx-2">•</span>
+                        <i class="fas fa-fire"></i>
+                        <span>500 CAL</span>
+                    </div>
+                </div>
+                
+                <div class="glass-card rounded-2xl p-6 group cursor-pointer">
+                    <div class="w-14 h-14 rounded-xl bg-accent/10 flex items-center justify-center mb-4 group-hover:bg-accent transition-colors">
+                        <i class="fas fa-fist-raised text-accent text-xl group-hover:text-white transition-colors"></i>
+                    </div>
+                    <h3 class="font-display text-2xl text-white mb-2">COMBAT FIT</h3>
+                    <p class="text-forge-400 text-sm mb-4">Boxing and martial arts inspired cardio for full-body conditioning.</p>
+                    <div class="flex items-center gap-2 text-xs text-forge-500">
+                        <i class="far fa-clock"></i>
+                        <span>50 MIN</span>
+                        <span class="mx-2">•</span>
+                        <i class="fas fa-fire"></i>
+                        <span>700 CAL</span>
+                    </div>
+                </div>
+                
+                <div class="glass-card rounded-2xl p-6 group cursor-pointer">
+                    <div class="w-14 h-14 rounded-xl bg-accent/10 flex items-center justify-center mb-4 group-hover:bg-accent transition-colors">
+                        <i class="fas fa-spa text-accent text-xl group-hover:text-white transition-colors"></i>
+                    </div>
+                    <h3 class="font-display text-2xl text-white mb-2">RECOVERY</h3>
+                    <p class="text-forge-400 text-sm mb-4">Yoga, stretching, and mobility work for optimal recovery.</p>
+                    <div class="flex items-center gap-2 text-xs text-forge-500">
+                        <i class="far fa-clock"></i>
+                        <span>30 MIN</span>
+                        <span class="mx-2">•</span>
+                        <i class="fas fa-fire"></i>
+                        <span>200 CAL</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-24 relative bg-forge-800/50">
+        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=1920&q=80')] bg-cover bg-center opacity-5"></div>
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16 reveal">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-6">
+                    <i class="fas fa-crown text-accent text-xs"></i>
+                    <span class="text-xs font-semibold tracking-widest uppercase text-forge-300">Membership Plans</span>
+                </div>
+                <h2 class="font-display text-5xl md:text-7xl text-white mb-6">INVEST IN <span class="text-accent">YOURSELF</span></h2>
+                <p class="text-forge-400 max-w-2xl mx-auto">All plans include 7-day free trial. No commitment. Cancel anytime.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto stagger" id="pricing-grid">
+                <!-- Basic Plan -->
+                <div class="glass-card rounded-3xl p-8 relative">
+                    <div class="mb-8">
+                        <h3 class="font-display text-2xl text-white mb-2">STEEL</h3>
+                        <p class="text-forge-400 text-sm">Essential access for starters</p>
+                    </div>
+                    <div class="mb-8">
+                        <span class="font-display text-5xl text-white">₹2,999</span>
+                        <span class="text-forge-400">/month</span>
+                    </div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center gap-3 text-forge-300 text-sm">
+                            <i class="fas fa-check text-accent"></i>
+                            <span>Gym floor access (6AM-10PM)</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-forge-300 text-sm">
+                            <i class="fas fa-check text-accent"></i>
+                            <span>Locker & shower facilities</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-forge-300 text-sm">
+                            <i class="fas fa-check text-accent"></i>
+                            <span>Basic equipment access</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-forge-500 text-sm">
+                            <i class="fas fa-times text-forge-600"></i>
+                            <span>Group classes</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-forge-500 text-sm">
+                            <i class="fas fa-times text-forge-600"></i>
+                            <span>Personal training</span>
+                        </li>
+                    </ul>
+                    <button onclick="selectPlan('Steel')" class="w-full py-4 border border-white/20 text-white rounded-xl font-semibold hover:bg-white/10 transition-all">
+                        Start Free Trial
+                    </button>
+                </div>
+
+                <!-- Pro Plan - Featured -->
+                <div class="glass-card plan-featured rounded-3xl p-8 relative transform md:-translate-y-4 accent-glow">
+                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-accent text-white px-4 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
+                        Most Popular
+                    </div>
+                    <div class="mb-8">
+                        <h3 class="font-display text-2xl text-white mb-2">TITAN</h3>
+                        <p class="text-forge-400 text-sm">For serious athletes</p>
+                    </div>
+                    <div class="mb-8">
+                        <span class="font-display text-5xl text-accent">₹4,999</span>
+                        <span class="text-forge-400">/month</span>
+                    </div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center gap-3 text-forge-300 text-sm">
+                            <i class="fas fa-check text-accent"></i>
+                            <span>24/7 unlimited access</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-forge-300 text-sm">
+                            <i class="fas fa-check text-accent"></i>
+                            <span>Unlimited group classes</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-forge-300 text-sm">
+                            <i class="fas fa-check text-accent"></i>
+                            <span>Sauna & steam room</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-forge-300 text-sm">
+                            <i class="fas fa-check text-accent"></i>
+                            <span>2 PT sessions/month</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-forge-500 text-sm">
+                            <i class="fas fa-times text-forge-600"></i>
+                            <span>Nutrition planning</span>
+                        </li>
+                    </ul>
+                    <button onclick="selectPlan('Titan')" class="w-full py-4 bg-accent text-white rounded-xl font-semibold hover:bg-accent-light transition-all">
+                        Start Free Trial
+                    </button>
+                </div>
+
+                <!-- Elite Plan -->
+                <div class="glass-card rounded-3xl p-8 relative">
+                    <div class="mb-8">
+                        <h3 class="font-display text-2xl text-white mb-2">LEGEND</h3>
+                        <p class="text-forge-400 text-sm">The complete package</p>
+                    </div>
+                    <div class="mb-8">
+                        <span class="font-display text-5xl text-white">₹8,999</span>
+                        <span class="text-forge-400">/month</span>
+                    </div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center gap-3 text-forge-300 text-sm">
+                            <i class="fas fa-check text-accent"></i>
+                            <span>Everything in Titan</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-forge-300 text-sm">
+                            <i class="fas fa-check text-accent"></i>
+                            <span>Unlimited PT sessions</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-forge-300 text-sm">
+                            <i class="fas fa-check text-accent"></i>
+                            <span>Custom nutrition plan</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-forge-300 text-sm">
+                            <i class="fas fa-check text-accent"></i>
+                            <span>Recovery treatments</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-forge-300 text-sm">
+                            <i class="fas fa-check text-accent"></i>
+                            <span>Guest passes (4/month)</span>
+                        </li>
+                    </ul>
+                    <button onclick="selectPlan('Legend')" class="w-full py-4 border border-white/20 text-white rounded-xl font-semibold hover:bg-white/10 transition-all">
+                        Start Free Trial
+                    </button>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12 reveal">
+                <p class="text-forge-400 text-sm">
+                    <i class="fas fa-shield-alt text-accent mr-2"></i>
+                    All plans include 7-day free trial • No credit card required • Cancel anytime
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Progress Tracker Section -->
+    <section id="progress" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <p class="text-accent font-semibold text-sm tracking-widest uppercase mb-4">Your Journey</p>
+                <h2 class="font-display text-5xl md:text-7xl text-white mb-6">TRACK YOUR <span class="text-accent">PROGRESS</span></h2>
+                <p class="text-forge-400 max-w-2xl mx-auto">Visualize your transformation. Slide through your fitness journey from Day 1 to today.</p>
+            </div>
+            
+            <div class="max-w-4xl mx-auto">
+                <!-- Progress Slider Control -->
+                <div class="glass-strong rounded-3xl p-8 md:p-12 mb-8 reveal">
+                    <div class="flex items-center justify-between mb-8">
+                        <div>
+                            <p class="text-forge-400 text-sm uppercase tracking-wider mb-1">Day</p>
+                            <p class="font-display text-4xl text-white" id="day-display">01</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-forge-400 text-sm uppercase tracking-wider mb-1">Progress</p>
+                            <p class="font-display text-4xl text-accent" id="progress-percent">0%</p>
+                        </div>
+                    </div>
+                    
+                    <div class="relative mb-4">
+                        <input type="range" min="1" max="30" value="1" class="progress-slider" id="day-slider" oninput="updateProgress(this.value)">
+                        <div class="flex justify-between text-xs text-forge-500 mt-2">
+                            <span>Day 1</span>
+                            <span>Day 15</span>
+                            <span>Day 30</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Progress Stats Grid -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8 reveal">
+                    <div class="glass-card rounded-2xl p-6 text-center">
+                        <i class="fas fa-weight text-accent text-2xl mb-2"></i>
+                        <p class="text-forge-400 text-xs uppercase tracking-wider mb-1">Weight</p>
+                        <p class="font-display text-2xl text-white" id="weight-stat">85.0 kg</p>
+                        <p class="text-xs text-green-400 mt-1" id="weight-change">--</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6 text-center">
+                        <i class="fas fa-percentage text-accent text-2xl mb-2"></i>
+                        <p class="text-forge-400 text-xs uppercase tracking-wider mb-1">Body Fat</p>
+                        <p class="font-display text-2xl text-white" id="bf-stat">22.0%</p>
+                        <p class="text-xs text-green-400 mt-1" id="bf-change">--</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6 text-center">
+                        <i class="fas fa-dumbbell text-accent text-2xl mb-2"></i>
+                        <p class="text-forge-400 text-xs uppercase tracking-wider mb-1">Strength</p>
+                        <p class="font-display text-2xl text-white" id="strength-stat">100 kg</p>
+                        <p class="text-xs text-green-400 mt-1" id="strength-change">--</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6 text-center">
+                        <i class="fas fa-heartbeat text-accent text-2xl mb-2"></i>
+                        <p class="text-forge-400 text-xs uppercase tracking-wider mb-1">Endurance</p>
+                        <p class="font-display text-2xl text-white" id="endurance-stat">5 km</p>
+                        <p class="text-xs text-green-400 mt-1" id="endurance-change">--</p>
+                    </div>
+                </div>
+                
+                <!-- Daily Checklist -->
+                <div class="glass-strong rounded-3xl p-8 reveal">
+                    <h3 class="font-display text-2xl text-white mb-6">Day <span id="checklist-day">1</span> Checklist</h3>
+                    <div class="space-y-4" id="checklist-container">
+                        <div class="check-item completed flex items-center gap-4 p-4 rounded-xl bg-white/5">
+                            <div class="check-circle">
+                                <i class="fas fa-check check-icon"></i>
+                            </div>
+                            <div class="flex-1">
+                                <p class="text-white font-medium text-sm">Morning Cardio (30 min)</p>
+                                <p class="text-forge-500 text-xs">Treadmill - 300 cal burned</p>
+                            </div>
+                            <span class="text-xs text-green-400 font-medium">Done</span>
+                        </div>
+                        
+                        <div class="check-item completed flex items-center gap-4 p-4 rounded-xl bg-white/5">
+                            <div class="check-circle">
+                                <i class="fas fa-check check-icon"></i>
+                            </div>
+                            <div class="flex-1">
+                                <p class="text-white font-medium text-sm">Protein Intake</p>
+                                <p class="text-forge-500 text-xs">150g protein consumed</p>
+                            </div>
+                            <span class="text-xs text-green-400 font-medium">Done</span>
+                        </div>
+                        
+                        <div class="check-item flex items-center gap-4 p-4 rounded-xl bg-white/5">
+                            <div class="check-circle">
+                                <i class="fas fa-check check-icon"></i>
+                            </div>
+                            <div class="flex-1">
+                                <p class="text-white font-medium text-sm">Evening Strength Training</p>
+                                <p class="text-forge-500 text-xs">Chest & Triceps - 60 min</p>
+                            </div>
+                            <span class="text-xs text-forge-500 font-medium">Pending</span>
+                        </div>
+                        
+                        <div class="check-item flex items-center gap-4 p-4 rounded-xl bg-white/5">
+                            <div class="check-circle">
+                                <i class="fas fa-check check-icon"></i>
+                            </div>
+                            <div class="flex-1">
+                                <p class="text-white font-medium text-sm">Hydration Goal</p>
+                                <p class="text-forge-500 text-xs">3.5 liters water</p>
+                            </div>
+                            <span class="text-xs text-forge-500 font-medium">Pending</span>
+                        </div>
+                        
+                        <div class="check-item flex items-center gap-4 p-4 rounded-xl bg-white/5">
+                            <div class="check-circle">
+                                <i class="fas fa-check check-icon"></i>
+                            </div>
+                            <div class="flex-1">
+                                <p class="text-white font-medium text-sm">Sleep (8 hours)</p>
+                                <p class="text-forge-500 text-xs">Target: 11PM - 7AM</p>
+                            </div>
+                            <span class="text-xs text-forge-500 font-medium">Pending</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 relative bg-forge-800/30">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-16">
+                <div class="reveal">
+                    <p class="text-accent font-semibold text-sm tracking-widest uppercase mb-4">Get In Touch</p>
+                    <h2 class="font-display text-5xl md:text-6xl text-white mb-6">START YOUR <span class="text-accent">JOURNEY</span></h2>
+                    <p class="text-forge-400 text-lg mb-12 leading-relaxed">
+                        Ready to transform? Reach out for a free consultation, tour our facility, or claim your 7-day trial. Our team is here 24/7.
+                    </p>
+                    
+                    <div class="space-y-8">
+                        <div class="flex items-start gap-5">
+                            <div class="w-14 h-14 rounded-2xl bg-accent/10 flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-map-marker-alt text-accent text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-display text-xl text-white mb-1">Location</h4>
+                                <p class="text-forge-400">IronForge HQ, Sector 29<br>Gurugram, Haryana 122001</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start gap-5">
+                            <div class="w-14 h-14 rounded-2xl bg-accent/10 flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-phone text-accent text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-display text-xl text-white mb-1">Phone</h4>
+                                <p class="text-forge-400">+91 98765 43210</p>
+                                <p class="text-forge-500 text-sm">Mon-Sun, 5AM - 11PM</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start gap-5">
+                            <div class="w-14 h-14 rounded-2xl bg-accent/10 flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-envelope text-accent text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-display text-xl text-white mb-1">Email</h4>
+                                <p class="text-forge-400">hello@ironforge.in</p>
+                                <p class="text-forge-500 text-sm">Response within 2 hours</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start gap-5">
+                            <div class="w-14 h-14 rounded-2xl bg-accent/10 flex items-center justify-center flex-shrink-0">
+                                <i class="fab fa-whatsapp text-accent text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-display text-xl text-white mb-1">WhatsApp</h4>
+                                <p class="text-forge-400">+91 98765 43210</p>
+                                <p class="text-forge-500 text-sm">Quick queries & booking</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="glass-strong rounded-3xl p-8 md:p-10 reveal">
+                    <h3 class="font-display text-2xl text-white mb-2">Send Message</h3>
+                    <p class="text-forge-400 text-sm mb-8">Fill the form below and we'll get back within 2 hours.</p>
+                    
+                    <form onsubmit="handleContact(event)" class="space-y-5">
+                        <div class="grid md:grid-cols-2 gap-5">
+                            <div>
+                                <label class="block text-forge-400 text-xs uppercase tracking-wider mb-2">First Name</label>
+                                <input type="text" required class="form-input w-full rounded-xl px-4 py-3 text-white text-sm" placeholder="John">
+                            </div>
+                            <div>
+                                <label class="block text-forge-400 text-xs uppercase tracking-wider mb-2">Last Name</label>
+                                <input type="text" required class="form-input w-full rounded-xl px-4 py-3 text-white text-sm" placeholder="Doe">
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-forge-400 text-xs uppercase tracking-wider mb-2">Email Address</label>
+                            <input type="email" required class="form-input w-full rounded-xl px-4 py-3 text-white text-sm" placeholder="john@example.com">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-forge-400 text-xs uppercase tracking-wider mb-2">Phone Number</label>
+                            <input type="tel" class="form-input w-full rounded-xl px-4 py-3 text-white text-sm" placeholder="+91 98765 43210">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-forge-400 text-xs uppercase tracking-wider mb-2">Interested In</label>
+                            <select id="plan-selector" class="form-input w-full rounded-xl px-4 py-3 text-white text-sm">
+                                <option>7-Day Free Trial</option>
+                                <option>Steel Plan (₹2,999)</option>
+                                <option>Titan Plan (₹4,999)</option>
+                                <option>Legend Plan (₹8,999)</option>
+                                <option>Personal Training</option>
+                                <option>Corporate Wellness</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-forge-400 text-xs uppercase tracking-wider mb-2">Message</label>
+                            <textarea rows="4" class="form-input w-full rounded-xl px-4 py-3 text-white text-sm resize-none" placeholder="Tell us about your fitness goals...">&lt;/textarea&gt;
+                        </div>
+                        
+                        <button type="submit" class="w-full py-4 bg-accent text-white rounded-xl font-semibold hover:bg-accent-light transition-all flex items-center justify-center gap-2 group">
+                            Send Message
+                            <i class="fas fa-paper-plane group-hover:translate-x-1 transition-transform"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-16 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-12 mb-12">
+                <div class="col-span-2">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 bg-accent rounded-lg flex items-center justify-center">
+                            <i class="fas fa-dumbbell text-white text-lg"></i>
+                        </div>
+                        <span class="font-display text-3xl text-white">IRON<span class="text-accent">FORGE</span></span>
+                    </div>
+                    <p class="text-forge-400 text-sm max-w-sm leading-relaxed mb-6">
+                        Elite fitness facility combining cutting-edge equipment, expert coaching, and a community driven by results. Challenge your limits.
+                    </p>
+                    <div class="flex gap-3">
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-forge-400 hover:bg-accent hover:text-white transition-all">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-forge-400 hover:bg-accent hover:text-white transition-all">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-forge-400 hover:bg-accent hover:text-white transition-all">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-forge-400 hover:bg-accent hover:text-white transition-all">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="font-display text-lg text-white mb-6">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#programs" class="text-forge-400 hover:text-accent transition-colors text-sm">Programs</a></li>
+                        <li><a href="#pricing" class="text-forge-400 hover:text-accent transition-colors text-sm">Pricing</a></li>
+                        <li><a href="#progress" class="text-forge-400 hover:text-accent transition-colors text-sm">Progress Tracker</a></li>
+                        <li><a href="#contact" class="text-forge-400 hover:text-accent transition-colors text-sm">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-display text-lg text-white mb-6">Legal</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-forge-400 hover:text-accent transition-colors text-sm">Privacy Policy</a></li>
+                        <li><a href="#" class="text-forge-400 hover:text-accent transition-colors text-sm">Terms of Service</a></li>
+                        <li><a href="#" class="text-forge-400 hover:text-accent transition-colors text-sm">Refund Policy</a></li>
+                        <li><a href="#" class="text-forge-400 hover:text-accent transition-colors text-sm">Cookie Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-forge-500 text-xs"> 2026 IronForge Fitness. All rights reserved.</p>
+                <p class="text-forge-500 text-xs">Made with <i class="fas fa-heart text-accent mx-1"></i> in India</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Trial Modal -->
+    <div id="trial-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeModal()"></div>
+        <div class="glass-strong rounded-3xl p-8 max-w-md w-full relative z-10 transform scale-95 opacity-0 transition-all duration-300" id="modal-content">
+            <button onclick="closeModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-forge-400 hover:text-white transition-colors">
+                <i class="fas fa-times"></i>
+            </button>
+            
+            <div class="text-center mb-6">
+                <div class="w-16 h-16 rounded-full bg-accent/20 flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-fire text-accent text-2xl"></i>
+                </div>
+                <h3 class="font-display text-3xl text-white mb-2">Start Your Trial</h3>
+                <p class="text-forge-400 text-sm">7 days free. No credit card required.</p>
+            </div>
+            
+            <form onsubmit="handleTrial(event)" class="space-y-4">
+                <input type="text" required placeholder="Full Name" class="form-input w-full rounded-xl px-4 py-3 text-white text-sm">
+                <input type="email" required placeholder="Email Address" class="form-input w-full rounded-xl px-4 py-3 text-white text-sm">
+                <input type="tel" required placeholder="Phone Number" class="form-input w-full rounded-xl px-4 py-3 text-white text-sm">
+                <select id="plan-selector" class="form-input w-full rounded-xl px-4 py-3 text-white text-sm">
+                    <option>Select Plan</option>
+                    <option value="Steel">Steel - ₹2,999/mo</option>
+                    <option value="Titan">Titan - ₹4,999/mo</option>
+                    <option value="Legend">Legend - ₹8,999/mo</option>
+                </select>
+                <button type="submit" class="w-full py-4 bg-accent text-white rounded-xl font-semibold hover:bg-accent-light transition-all">
+                    Claim Free Trial
+                </button>
+            </form>
+            
+            <p class="text-center text-forge-500 text-xs mt-4">
+                By signing up, you agree to our Terms & Privacy Policy
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Mobile Menu
+        const mobileBtn = document.getElementById('mobile-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        let menuOpen = false;
+        
+        mobileBtn.addEventListener('click', () => {
+            menuOpen = !menuOpen;
+            if (menuOpen) {
+                mobileMenu.classList.remove('translate-x-full');
+                document.getElementById('m-line-1').style.transform = 'rotate(45deg) translate(5px, 5px)';
+                document.getElementById('m-line-2').style.opacity = '0';
+                document.getElementById('m-line-3').style.transform = 'rotate(-45deg) translate(5px, -5px)';
+                document.getElementById('m-line-3').style.width = '20px';
+            } else {
+                closeMobile();
+            }
+        });
+        
+        function closeMobile() {
+            menuOpen = false;
+            mobileMenu.classList.add('translate-x-full');
+            document.getElementById('m-line-1').style.transform = 'none';
+            document.getElementById('m-line-2').style.opacity = '1';
+            document.getElementById('m-line-3').style.transform = 'none';
+            document.getElementById('m-line-3').style.width = '12px';
+        }
+        
+        // Navbar
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('glass-strong');
+            } else {
+                navbar.classList.remove('glass-strong');
+            }
+        });
+        
+        // Intersection Observer
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    if (entry.target.classList.contains('stagger')) {
+                        entry.target.classList.add('visible');
+                    }
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        document.querySelectorAll('.reveal, .stagger').forEach(el => observer.observe(el));
+        
+        // Progress Tracker Data
+        const progressData = {
+            days: Array.from({length: 30}, (_, i) => i + 1),
+            weight: Array.from({length: 30}, (_, i) => (85 - (i * 0.4)).toFixed(1)),
+            bodyFat: Array.from({length: 30}, (_, i) => (22 - (i * 0.35)).toFixed(1)),
+            strength: Array.from({length: 30}, (_, i) => Math.floor(100 + (i * 2.5))),
+            endurance: Array.from({length: 30}, (_, i) => (5 + (i * 0.15)).toFixed(2))
+        };
+        
+        function updateProgress(day) {
+            day = parseInt(day);
+            const idx = day - 1;
+            
+            document.getElementById('day-display').textContent = day.toString().padStart(2, '0');
+            document.getElementById('progress-percent').textContent = Math.floor((day / 30) * 100) + '%';
+            document.getElementById('checklist-day').textContent = day;
+            
+            // Update stats
+            document.getElementById('weight-stat').textContent = progressData.weight[idx] + ' kg';
+            document.getElementById('bf-stat').textContent = progressData.bodyFat[idx] + '%';
+            document.getElementById('strength-stat').textContent = progressData.strength[idx] + ' kg';
+            document.getElementById('endurance-stat').textContent = progressData.endurance[idx] + ' km';
+            
+            // Calculate changes from day 1
+            const wChange = (progressData.weight[0] - progressData.weight[idx]).toFixed(1);
+            const bfChange = (progressData.bodyFat[0] - progressData.bodyFat[idx]).toFixed(1);
+            const sChange = progressData.strength[idx] - progressData.strength[0];
+            const eChange = (progressData.endurance[idx] - progressData.endurance[0]).toFixed(2);
+            
+            document.getElementById('weight-change').textContent = wChange > 0 ? `↓ ${wChange} kg` : '--';
+            document.getElementById('bf-change').textContent = bfChange > 0 ? `↓ ${bfChange}%` : '--';
+            document.getElementById('strength-change').textContent = sChange > 0 ? `↑ +${sChange} kg` : '--';
+            document.getElementById('endurance-change').textContent = eChange > 0 ? `↑ +${eChange} km` : '--';
+            
+            // Update checklist based on day
+            updateChecklist(day);
+        }
+        
+        function updateChecklist(day) {
+            const container = document.getElementById('checklist-container');
+            const items = [
+                { name: 'Morning Cardio', sub: 'Treadmill - 300 cal', done: day > 0 },
+                { name: 'Protein Intake', sub: `${120 + (day * 2)}g protein consumed`, done: day > 0 },
+                { name: 'Strength Training', sub: day % 2 === 0 ? 'Chest & Triceps' : 'Back & Biceps', done: day > 1 },
+                { name: 'Hydration Goal', sub: `${3 + (day * 0.05).toFixed(2)} liters`, done: day > 2 },
+                { name: 'Sleep (8 hours)', sub: 'Target: 11PM - 7AM', done: day > 3 }
+            ];
+            
+            container.innerHTML = items.map((item, i) => `
+                <div class="check-item ${item.done ? 'completed' : ''} flex items-center gap-4 p-4 rounded-xl bg-white/5">
+                    <div class="check-circle">
+                        <i class="fas fa-check check-icon"></i>
+                    </div>
+                    <div class="flex-1">
+                        <p class="text-white font-medium text-sm">${item.name}</p>
+                        <p class="text-forge-500 text-xs">${item.sub}</p>
+                    </div>
+                    <span class="text-xs ${item.done ? 'text-green-400' : 'text-forge-500'} font-medium">${item.done ? 'Done' : 'Pending'}</span>
+                </div>
+            `).join('');
+        }
+        
+        // Initialize
+        updateProgress(1);
+        
+        // Modal Functions
+        function selectPlan(plan) {
+            const modal = document.getElementById('trial-modal');
+            const content = document.getElementById('modal-content');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            const selector = document.getElementById('plan-selector');
+            if (selector && plan) selector.value = plan;
+            setTimeout(() => {
+                content.classList.remove('scale-95', 'opacity-0');
+                content.classList.add('scale-100', 'opacity-100');
+            }, 50);
+        }
+        
+        function closeModal() {
+            const modal = document.getElementById('trial-modal');
+            const content = document.getElementById('modal-content');
+            content.classList.remove('scale-100', 'opacity-100');
+            content.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }, 300);
+        }
+        
+        function handleTrial(e) {
+            e.preventDefault();
+            alert('Welcome to IronForge! Your 7-day free trial starts now. Check your email for details.');
+            closeModal();
+        }
+        
+        function handleContact(e) {
+            e.preventDefault();
+            alert('Message sent! Our team will contact you within 2 hours.');
+            e.target.reset();
+        }
+        
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+    </script>
+</body>
+</html>
+</textarea>
+
+    <script>
+        function load(n) {
+            const content = document.getElementById('p' + n).value;
+            const blob = new Blob([content], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const ifr = document.getElementById('viewer');
+            
+            // Revoke old URL if it exists
+            if (ifr.dataset.url) URL.revokeObjectURL(ifr.dataset.url);
+            
+            ifr.src = url;
+            ifr.dataset.url = url;
+            
+            document.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+            document.getElementById('b' + n).classList.add('active');
+        }
+        window.onload = () => load(1);
+    </script>
+</body>
+</html>
